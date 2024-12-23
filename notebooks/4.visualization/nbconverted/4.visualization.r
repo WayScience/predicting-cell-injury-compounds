@@ -113,7 +113,6 @@ cyto_proba_df <- cyto_proba_df %>%
 cyto_proba_df <- cyto_proba_df %>%
   mutate(injury = ifelse(datatype == "JUMP Overlap", "Cyto JUMP Overlap", injury))
 
-
 # Update injury proba columns
 all_injury_proba_df <- all_injury_proba_df %>%
   mutate(shuffled = replace(shuffled, shuffled == "False", "Not shuffled"),
@@ -173,6 +172,12 @@ f1_scores_per_injury_df <- f1_scores_per_injury_df %>%
     y = y_values
   )
 
+# Make sure labels are alphabetically ordered
+f1_scores_per_injury_df$injury_type <- factor(
+  f1_scores_per_injury_df$injury_type,
+  levels = unique(f1_scores_per_injury_df$injury_type[order(tolower(f1_scores_per_injury_df$injury_type))])
+  )
+
 f1_scores_per_injury_df
 
 # plot data
@@ -183,6 +188,12 @@ options(repr.plot.width = width, repr.plot.height = height)
 # Updating label names
 pr_f1_curve <- pr_f1_curve %>%
   mutate(shuffled = ifelse(shuffled == "Not Shuffled", "Not shuffled", shuffled))
+
+# Make sure labels are alphabetically ordered
+pr_f1_curve$injury_type <- factor(
+  pr_f1_curve$injury_type,
+  levels = unique(pr_f1_curve$injury_type[order(tolower(pr_f1_curve$injury_type))])
+  )
 
 # # original
 fig2_B_pr_curve_plot_train_test <- ggplot(pr_f1_curve, aes(x = recall, y = precision)) +
