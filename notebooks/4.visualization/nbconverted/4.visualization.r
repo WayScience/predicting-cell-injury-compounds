@@ -175,7 +175,6 @@ f1_scores_per_injury_df <- f1_scores_per_injury_df %>%
 
 f1_scores_per_injury_df
 
-
 # plot data
 width <- 12
 height <- 12
@@ -367,7 +366,10 @@ sfig3_model_cm <- (
 )
 
 # saving file
-ggsave(filename = "figures/supplemental/sfig3_shuffled_confusion_matrix.png", height = height, width = width, dpi = 600)
+for (fig_extension in c(".png", ".jpg")) {
+  figure_name_with_extension <- paste0("figures/supplemental/sfig3_shuffled_confusion_matrix", fig_extension)
+  ggsave(filename = figure_name_with_extension, height = height, width = width, dpi = 600)
+}
 
 sfig3_model_cm
 
@@ -440,7 +442,10 @@ sfig4_treatment_holdout_cm <- (
     )
 
 # saving file
-ggsave(filename = "figures/supplemental/sfig4_treatment_holdout_confusion_matrix.png", height = 9, width = 14, dpi = 600)
+for (fig_extension in c(".png", ".jpg")) {
+  figure_name_with_extension <- paste0("figures/supplemental/sfig4_treatment_holdout_confusion_matrix", fig_extension)
+  ggsave(filename = figure_name_with_extension, height = 9, width = 14, dpi = 600)
+}
 
 sfig4_treatment_holdout_cm
 
@@ -627,13 +632,17 @@ all_injury_probas_ridge_plot <- wrap_plots(ridge_plots_list[1:14], ncol = 3)
 all_injury_probas_ridge_plot
 
 # Save the plot
-ggsave(
-  plot = all_injury_probas_ridge_plot,
-  filename = "figures/supplemental/sfig5_all_injury_probabilities.png",
-  height = img_height,
-  width = img_width,
-  dpi = 700
-)
+for (fig_extension in c(".png", ".jpg")) {
+  figure_name_with_extension <- paste0("figures/supplemental/sfig5_all_injury_probabilities", fig_extension)
+  ggsave(
+    plot = all_injury_probas_ridge_plot,
+    filename = figure_name_with_extension,
+    height = img_height,
+    width = img_width,
+    dpi = 700
+  )
+}
+
 
 # Define plot dimensions
 height = 24.5
@@ -669,11 +678,14 @@ fig2 <- (
 # Display the combined plot
 fig2
 
-# # Save the plot
-ggsave(
-  plot = fig2,
-  filename = "figures/Final_Figure2.png",
-  height = height,
-  width = width,
-  dpi = 700
-)
+# Save the plot
+for (fig_extension in c(".png", ".pdf")) {
+  figure_name_with_extension <- paste0("figures/Final_Figure2", fig_extension)
+  ggsave(
+    plot = fig2,
+    filename = figure_name_with_extension,
+    height = height,
+    width = width,
+    dpi = 700
+  )
+}
